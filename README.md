@@ -24,8 +24,8 @@
   <li>
     핵심 서비스 구현
     <ul>
-      <li>관리자가 농구장을 등록,수정 하고 사용자가 예약,결제 할수 있는 기능 구현</li>
-      <li>관리자가 공식 경기 등록, 수정 하고 사용자가 예약,결제 할 수 있는 기능 구현</li>
+      <li>관리자가 농구장을 등록,수정 하고 농구장 목록에서 사용자가 예약,결제 할수 있는 기능 구현</li>
+      <li>관리자가 공식 경기 등록, 수정 하고 경기 목록에서 사용자가 예약,결제 할 수 있는 기능 구현</li>
     </ul>
   </li>
 </ol>
@@ -33,10 +33,8 @@
 <ul>
   <li>OS : macOS Sonoma 14.4.1</li>
   <li>DB : mariaDB 11.3.2</li>
-  <li>SERVER : Apache Tomcat 9.0, AWS</li>
-  <li>FRONTEND : JavaScript, HTML, CSS, JQuery</li>
-  <li>BACKEND : JAVA, Spring Framework</li>
-  <li>TOOL : git(sourceTree), github, STS3, DBeaver</li>
+  <li>SERVER : Apache Tomcat 9.0, AWS EC2</li>
+  <li>FRONTEND : JavaScript, HTML, CSS, JQuery, ajax</li>
+  <li>BACKEND : JAVA, Spring Framework, MyBatis</li>
+  <li>TOOL : SourceTree, STS3, DBeaver</li>
 </ul>
-<h2>구현 기능</h2>
-<h2></h2>
