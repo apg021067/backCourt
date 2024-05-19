@@ -1,6 +1,6 @@
 # BACK COURT
 ## 프로젝트 소개
-- Spring Framework를 이용한 농구 매칭 웹 프로젝트
+- Spring Framework를 사용한 농구 매칭 웹 서비스
 
 ## 프로젝트 진행한 목적
 - 기존의 불편한 농구 매칭 과정을 간편하게
