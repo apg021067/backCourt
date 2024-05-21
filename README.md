@@ -29,7 +29,7 @@
 - AWS EC2, Docker, Tomcat을 활용하여 서비스를 배포
 
 ## ERD
-
+![백코트](https://github.com/apg021067/backCourt/assets/157499897/c8e5dab3-7597-488d-855a-9d866159ed11)
 
 ## 개발 환경 및 기술
 - OS : macOS Sonoma 14.4.1
