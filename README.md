@@ -2,15 +2,8 @@
 ## 프로젝트 소개
 ### 접속
 - 123.456.78.9
-  
-### 계정
-- 관리자
-  - ID : admin
-  - PW : pass
-- 사용자
-  - ID : user1
-  - PW : pass
-
+- 관리자 ID : admin PW : pass
+- 사용자 ID : user1 PW : pass
 
 ### 프로젝트 진행한 목적
 - 기존의 불편한 농구 매칭 과정을 간편하게
