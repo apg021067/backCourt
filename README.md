@@ -19,6 +19,12 @@
 |:-:|:-:|:-:|:-:|:-:|
 |[@apg021067](https://github.com/apg021067)|[@min0eda](https://github.com/min0eda)|[@eogns22222](https://github.com/eogns22222)|[@tmdals9781](https://github.com/tmdals9781)|[@woo677](https://github.com/woo677)|  
 
+
+## Team 
+|<img src="https://avatars.githubusercontent.com/u/157499897?v=4" width="150" height="150"/>|
+|:-:|
+|[@apg021067](https://github.com/apg021067)|
+
 ### 핵심 기능
 1. 회원
     - 로그인
