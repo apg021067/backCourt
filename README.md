@@ -11,7 +11,7 @@ BACK COURT는 사용자가 농구 경기에 혼자라도 쉽게 참여할수 있
 ## 🗓️일정
 - 24.04.01 ~ 24.05.10
 
-## Team  
+## ⛹️‍♂️Team  
 |<img src="https://avatars.githubusercontent.com/u/157499897?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167273720?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/77182293?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/167273795?v=4" width="150" height="150"/>|<img src="https://avatars.githubusercontent.com/u/63435073?v=4" width="150" height="150"/>|
 |:-:|:-:|:-:|:-:|:-:|
 |[@apg021067](https://github.com/apg021067)|[@min0eda](https://github.com/min0eda)|[@eogns22222](https://github.com/eogns22222)|[@tmdals9781](https://github.com/tmdals9781)|[@woo677](https://github.com/woo677)|  
