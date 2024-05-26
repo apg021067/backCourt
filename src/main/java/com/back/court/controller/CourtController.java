@@ -1,8 +1,10 @@
 package com.back.court.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -26,6 +28,10 @@ public class CourtController {
 
 	@RequestMapping(value = "/court/list.go")
 	public String listGo(HttpSession session) {
+		String id = (String) session.getAttribute("loginId");
+		if (id == null) {
+			return "redirect:/login.go";
+		}
 		logger.info("list.go /");
 		return "court/list";
 	}
@@ -42,12 +48,18 @@ public class CourtController {
 
 	@RequestMapping(value = "/court/jjim.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Boolean> jjimAdd(HttpSession session, String courtIdx) {
+	public Map<String, Boolean> jjimAdd(HttpSession session, String courtIdx, HttpServletResponse response) {
 		logger.info("jjimAdd / courtIdx = {}", courtIdx);
-
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
-//		세션 아이디 받아오
 		String id = (String) session.getAttribute("loginId");
+		if (id == null) {
+			try {
+				response.sendRedirect("/login.go");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		map.put("result", courtService.jjim(id, Integer.parseInt(courtIdx)));
 
 		return map;
@@ -70,8 +82,8 @@ public class CourtController {
 
 	@RequestMapping(value = "/court/detail.go")
 	public String detailGo(HttpSession session, Model model, String court_idx) {
-		String loginId = (String) session.getAttribute("loginId");
-		if (loginId == null) {
+		String id = (String) session.getAttribute("loginId");
+		if (id == null) {
 			return "redirect:/login.go";
 		}
 		logger.info(court_idx);
@@ -90,8 +102,6 @@ public class CourtController {
 	@ResponseBody
 	public Map<String, Boolean> booking(HttpSession session, String courtStartTime, String courtIdx, String courtPrice,
 			String courtDate) {
-
-		// 수정필요
 		String id = (String) session.getAttribute("loginId");
 
 		return courtService.booking(courtStartTime, courtIdx, courtPrice, id, courtDate);
