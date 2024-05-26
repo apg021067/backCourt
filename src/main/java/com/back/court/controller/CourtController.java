@@ -71,9 +71,9 @@ public class CourtController {
 	@RequestMapping(value = "/court/detail.go")
 	public String detailGo(HttpSession session, Model model, String court_idx) {
 		String loginId = (String) session.getAttribute("loginId");
-//		if (loginId == null && loginId.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		if (loginId == null) {
+			return "redirect:/login.go";
+		}
 		logger.info(court_idx);
 		model.addAttribute("courtIdx", court_idx);
 		return "court/detail";
