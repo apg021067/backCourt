@@ -22,7 +22,7 @@
             <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
 					<c:forEach items="${photo}" var="list">
-						<div class="swiper-slide"><img src="/court/${list.file_name}.png"></div>
+						<div class="swiper-slide"><img src="/courtImage/${list.file_name}.png"></div>
 					</c:forEach>
                 </div>
                 <div class="swiper-button-next"></div>

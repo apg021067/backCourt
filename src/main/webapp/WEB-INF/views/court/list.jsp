@@ -236,7 +236,7 @@
 			var jjim = item.jjim > 0 ? 'jjim.png':'no_jjim.png';
 			content +=
 				'<tr class="courtListTr">'
-				+'<td class="courtListTd"><img class="courtImage"  src="/court/'+img+'" alt="courtImage"></td>'
+				+'<td class="courtListTd"><img class="courtImage"  src="/courtImage/'+img+'" alt="courtImage"></td>'
 				+'<td class="courtListTd">'+item.courtName+'</td>'
 				+'<td class="courtListTd">'+item.courtAddress.split(' ')[1]+'</td>'
 				+'<td class="courtListTd">'+item.courtPrice+'</td>'

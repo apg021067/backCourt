@@ -19,7 +19,7 @@
         <form action="./create.do" method="post" enctype="multipart/form-data">
             <div class="leftCont">
                 <div class="imgBox" id="imgBox">
-                    <img id="img" src="/logo/default_logo.png" alt="">
+                    <img id="img" src="/logoImage/default_logo.png" alt="">
                 </div>
                 <button type="button" class="siteLogo">로고 선택</button>
                 <!-- 최종 로고 저장 장소 -->
@@ -80,25 +80,25 @@
         <div class="popWrap">
             <div class="logoCont">
                 <ul>
-                    <li><img src="/logo/team_siteLogo01.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo02.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo03.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo04.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo01.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo02.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo03.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo04.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
                 </ul>
             </div>
             <button class="selectBtn">선택완료</button>
@@ -146,7 +146,7 @@
         console.log($('#sitePhotos').val());
         
         imgContent +=
-        	'<img id="img" src="/logo/' + newLogoName + '.png" alt="">';
+        	'<img id="img" src="/logoImage/' + newLogoName + '.png" alt="">';
         
         $('#imgBox').html(imgContent);
         

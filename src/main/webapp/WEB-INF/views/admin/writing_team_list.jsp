@@ -200,7 +200,7 @@
             	+'<td class="num">' + item.join_team_idx + '</td>'
             	+'<td class="logo">'
             	+'<div>'
-            	+'<img src="/logo/' + item.logo + '.png" alt="">'
+            	+'<img src="/logoImage/' + item.logo + '.png" alt="">'
             	+'</div>'
             	+'</td>'
             	+'<td class="teamNikName">'

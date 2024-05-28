@@ -251,7 +251,7 @@
                 var content = '';
                 if(data.fileName.length > 0 ){
 	                for(item of data.fileName){
-	                	content += '<div class="swiper-slide"><img src="/court/'+item+'.png" alt="Image"></div>';
+	                	content += '<div class="swiper-slide"><img src="/courtImage/'+item+'.png" alt="Image"></div>';
 	                }
                 	
                 }else{

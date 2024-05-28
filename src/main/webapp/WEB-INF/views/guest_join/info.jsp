@@ -244,10 +244,10 @@
 				if(data.fileName.length > 0){
 					console.log(data.fileName);
 					for(item of data.fileName){
-						content += '<div class="swiper-slide"><img src="/court/'+ item +'.png" alt="Image"></div>';
+						content += '<div class="swiper-slide"><img src="/courtImage/'+ item +'.png" alt="Image"></div>';
 					}
 				}else{
-					content += '<div class="swiper-slide"><img src="/court/no_image.png" alt="Image"></div>';
+					content += '<div class="swiper-slide"><img src="/courtImage/no_image.png" alt="Image"></div>';
 				}
 				$('#swiperImage').html(content);
 				

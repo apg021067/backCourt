@@ -162,7 +162,7 @@
 			console.log(item.team_idx);
 			content +=
 				'<tr class="adminteamListTr">'
-				+'<td class="adminteamListTd"><img class="logo" src="/logo/'+ item.logo +'.jpg" alt="" /><span class="teamIdx">'+ item.team_idx+'</span></td>'
+				+'<td class="adminteamListTd"><img class="logo" src="/logoImage/'+ item.logo +'.jpg" alt="" /><span class="teamIdx">'+ item.team_idx+'</span></td>'
 				+'<td class="adminteamListTd">'+item.team_name+'</td>'
 				+'<td class="adminteamListTd">'+item.team_address+'</td>'
 				+'<td class="adminteamListTd">'+item.id+'</td>'

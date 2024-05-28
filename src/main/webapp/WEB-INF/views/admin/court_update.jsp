@@ -142,7 +142,7 @@
 	var content = '';
     if(courtFileNameList.length > 0 ){
         for(item of courtFileNameList){
-        	content += '<div class="swiper-slide"><img src="/court/'+item+'.png" alt="Image"></div>';
+        	content += '<div class="swiper-slide"><img src="/courtImage/'+item+'.png" alt="Image"></div>';
         }
     	
     }else{
