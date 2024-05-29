@@ -27,11 +27,7 @@ public class CourtController {
 	CourtService courtService;
 
 	@RequestMapping(value = "/court/list.go")
-	public String listGo(HttpSession session) {
-		String id = (String) session.getAttribute("loginId");
-		if (id == null) {
-			return "redirect:/login.go";
-		}
+	public String listGo() {
 		logger.info("list.go /");
 		return "court/list";
 	}

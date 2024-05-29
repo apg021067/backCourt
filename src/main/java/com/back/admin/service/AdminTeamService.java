@@ -21,9 +21,7 @@ public class AdminTeamService {
 	@Autowired
 	AdminTeamDAO adminTeamDAO;
 
-	String macRoot = "/Users/chaehyeonpark/Documents/gdj78_backcourt/upload/court/";
-
-	String winRoot = "C:/upload/court/";
+	private final String ROOT = "/usr/local/tomcat/webapps/teamImage/";
 
 	public Map<String, Object> teamList(Map<String, Object> param) {
 		logger.info("teamList service in");
@@ -61,11 +59,11 @@ public class AdminTeamService {
 	public Map<String, Boolean> teamUpdate(Map<String, Object> param) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 		result.put("result", adminTeamDAO.teamUpdate(param));
-		String logoFlag = (String)param.get("logoFlag");
-		
-		logger.info("logoFlag = "+ logoFlag);
+		String logoFlag = (String) param.get("logoFlag");
+
+		logger.info("logoFlag = " + logoFlag);
 		if (logoFlag.contains("true")) {
-			logger.info("logoFlag = "+ logoFlag);	
+			logger.info("logoFlag = " + logoFlag);
 			String fileName = adminTeamDAO.teamLogoName(param);
 			teamLogoDelete(fileName);
 			result.put("result", adminTeamDAO.teamLogoUpdate(param));
@@ -77,14 +75,8 @@ public class AdminTeamService {
 		String os = System.getProperty("os.name").toLowerCase();
 
 		logger.info(os);
-		String directory = "";
-		if (os.contains("mac")) {
-			directory = macRoot;
-		} else if (os.contains("win")) {
-			directory = winRoot;
-		}
 
-		File file = new File(directory + fileName);
+		File file = new File(ROOT + fileName);
 		if (file.exists()) {
 			file.delete();
 		}
@@ -92,7 +84,7 @@ public class AdminTeamService {
 	}
 
 	public AdminTeamDTO teamMemberDetail(String join_team_idx) {
-		
+
 		return adminTeamDAO.teamMemberDetail(join_team_idx);
 	}
 
@@ -101,23 +93,3 @@ public class AdminTeamService {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

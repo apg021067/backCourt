@@ -31,9 +31,7 @@ public class AdminCourtService {
 	@Autowired
 	AdminCourtDAO adminCourtDAO;
 
-	String macRoot = "/Users/chaehyeonpark/Documents/gdj78_backcourt/upload/court/";
-
-	String winRoot = "C:/upload/court/";
+	private final String ROOT = "/usr/local/tomcat/webapps/courtImage/";
 
 	public Map<String, Object> list(Map<String, Object> param) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -98,45 +96,18 @@ public class AdminCourtService {
 	}
 
 	public void courtImageUploading(int idx, MultipartFile[] files) {
-
-		String os = System.getProperty("os.name").toLowerCase();
-
-		logger.info(os);
-		String directory = "";
-		if (os.contains("mac")) {
-			directory = macRoot;
-		} else if (os.contains("win")) {
-			directory = winRoot;
-		}
-		File dirPath = new File(directory);
-		logger.info("경로 " + directory);
-		Path path = Paths.get(directory);
-		try {
-			Files.createDirectories(path.getParent());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		// 폴더가 존재하지 않으면 생성
-		if (!dirPath.exists()) {
-			dirPath.mkdirs();
-			logger.info("폴더가 생성되었습니다.");
-		}
-
-		int count = 1;
+		int imageIdx = 1;
 		for (MultipartFile file : files) {
-			String fileName = file.getOriginalFilename();
-			String newFileName = "court" + idx + "_image" + count;
-			Path filePath = Paths.get(directory + newFileName + ".png");
-
 			try {
 				byte[] bytes = file.getBytes();
-				Files.write(filePath, bytes);
+				String newFileName = "court" + idx + "_image" + imageIdx;
+				Path path = Paths.get(ROOT + newFileName + ".png");
+				Files.write(path, bytes);
 				adminCourtDAO.courtImageUpload(Integer.toString(idx), newFileName);
-			} catch (IOException e) {
-				logger.error("Failed to write file: " + filePath, e);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			count++;
+			imageIdx++;
 		}
 	}
 
@@ -177,17 +148,9 @@ public class AdminCourtService {
 	// 구장 이미지 테이블에서 제거후 파일 삭제
 	public void courtImageDelete(int courtIdx, List<String> fileNameList) {
 		adminCourtDAO.deleteFileList(courtIdx);
-		String os = System.getProperty("os.name").toLowerCase();
 
-		logger.info(os);
-		String directory = "";
-		if (os.contains("mac")) {
-			directory = macRoot;
-		} else if (os.contains("win")) {
-			directory = winRoot;
-		}
 		for (String fileName : fileNameList) {
-			File file = new File(directory + fileName);
+			File file = new File(ROOT + fileName);
 			if (file.exists()) {
 				file.delete();
 			}

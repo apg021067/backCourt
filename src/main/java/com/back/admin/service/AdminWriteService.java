@@ -53,21 +53,22 @@ public class AdminWriteService {
 	}
 
 	// official 리스트
-	public Map<String, Object> officialList(int page, String searchFlag, String searchWord, String address, String level) {
+	public Map<String, Object> officialList(int page, String searchFlag, String searchWord, String address,
+			String level) {
 
 		// 시작 페이지
 		int start = (page - 1) * 10;
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		// 모든 리스트
 		List<AdminWriteDTO> list = adminWriteDAO.officialList();
 		// 가공될 리스트
 		List<AdminWriteDTO> processedList = new ArrayList<AdminWriteDTO>();
-		
+
 		// 주소 리스트
 		map.put("addressList", addressDeduplication(list));
-		
+
 		// 검색
 		if (searchFlag.equals("true")) { // 지역명 검색
 			processedList = addressProcessedListing(list, searchWord);
@@ -82,17 +83,17 @@ public class AdminWriteService {
 		} else { // 기본
 			processedList = list;
 		}
-		
+
 		// 리스트에 추가
 		map.put("list", pagingList(processedList, start));
-		
+
 		int totalPage = processedList.size() % 10 > 0 ? processedList.size() / 10 + 1 : processedList.size() / 10;
 		// 총 페이지
 		map.put("totalPage", totalPage);
-		
+
 		return map;
 	}
-	
+
 	// 주소 구 단위로 자르고 가나다순 정렬
 	public List<String> addressDeduplication(List<AdminWriteDTO> list) {
 		Set<String> set = new HashSet<String>();
@@ -104,7 +105,7 @@ public class AdminWriteService {
 		Collections.sort(DeduplicationList);
 		return DeduplicationList;
 	}
-	
+
 	// 주소 필터 메서드
 	public List<AdminWriteDTO> addressProcessedListing(List<AdminWriteDTO> list, String address) {
 		List<AdminWriteDTO> processedList = new ArrayList<AdminWriteDTO>();
@@ -115,7 +116,7 @@ public class AdminWriteService {
 		}
 		return processedList;
 	}
-	
+
 	// 레벨 필터 메서드
 	public List<AdminWriteDTO> levelProcessedListing(List<AdminWriteDTO> list, String level) {
 		List<AdminWriteDTO> processedList = new ArrayList<AdminWriteDTO>();
@@ -126,7 +127,7 @@ public class AdminWriteService {
 		}
 		return processedList;
 	}
-	
+
 	// 페이징 처리위해 10개씩만
 	public List<AdminWriteDTO> pagingList(List<AdminWriteDTO> processedList, int start) {
 		List<AdminWriteDTO> list = new ArrayList<AdminWriteDTO>();
@@ -204,11 +205,11 @@ public class AdminWriteService {
 	public Map<String, Object> teamList(Map<String, Object> param) {
 		// 시작 페이지
 		int start = (Integer.parseInt((String) param.get("currentPage")) - 1) * 10;
-		
-		param.put("start", start);		
-		
+
+		param.put("start", start);
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		// 리스트
 		map.put("list", adminWriteDAO.teamList(param));
 		// 주소 리스트
@@ -216,18 +217,18 @@ public class AdminWriteService {
 		// 총 페이지
 		int totalPage = adminWriteDAO.totalPage(param);
 		map.put("totalPage", totalPage % 10 > 0 ? totalPage / 10 + 1 : totalPage / 10);
-		
+
 		return map;
 	}
 
 	public Map<String, Object> guestList(Map<String, Object> param) {
 		// 시작 페이지
 		int start = (Integer.parseInt((String) param.get("currentPage")) - 1) * 10;
-		
-		param.put("start", start);		
-		
+
+		param.put("start", start);
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		// 리스트
 		map.put("list", adminWriteDAO.guestList(param));
 		// 주소 리스트
@@ -236,10 +237,10 @@ public class AdminWriteService {
 		int totalPage = adminWriteDAO.totalPageGuest(param);
 		logger.info(String.valueOf(totalPage));
 		map.put("totalPage", totalPage % 10 > 0 ? totalPage / 10 + 1 : totalPage / 10);
-		
+
 		return map;
 	}
-	
+
 	// (팀 리스트, 게스트 리스트) 주소 구 단위로 자르고 가나다순 정렬
 	public List<String> processedAddress(List<String> list) {
 		List<String> processedList = new ArrayList<String>();
@@ -256,7 +257,7 @@ public class AdminWriteService {
 	public void guestUpdateGo(Model model, String guestIdx) {
 		AdminWriteDTO dto = adminWriteDAO.guestUpdateGo(guestIdx);
 		model.addAttribute("officialInfo", dto);
-		
+
 	}
 
 	// 게스트 모집글 수정 - 코트 리스트
@@ -316,25 +317,3 @@ public class AdminWriteService {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
