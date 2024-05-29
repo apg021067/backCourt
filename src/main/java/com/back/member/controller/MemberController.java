@@ -25,87 +25,97 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
-	//로그인 페이지 접속
+	// 로그인 페이지 접속
 	@RequestMapping(value = "/login")
 	public String home() {
 		logger.info("로그인 접속");
 		return "member/login";
 	}
-	
-	//로그인
-	@RequestMapping(value = "/login.do",method = RequestMethod.POST)
-	public String login(HttpSession session,String id,String pw,Model model) {
-		logger.info("로그인 정보 : "+ id,pw);
-		String loginId = memberService.login(id,pw);
-		MemberDTO loginInformation = memberService.loginperm(id,pw);
-		String loginperm = loginInformation.getPerm();
-		String loginstate = loginInformation.getState();
-		logger.info("loginId : "+loginId);
-		logger.info("loginstate : {}",loginperm);
-		logger.info("loginstate : {}",loginstate);
-		
+
+	// 로그인
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String login(HttpSession session, String id, String pw, Model model) {
+		logger.info("\n로그인 정보 : id = " + id + "\n로그인 정보 : pw = " + pw);
+
 		String page = "member/login";
 
-		
-		if (loginId!=null) {
-			logger.info("로그인 아이디 정보 있음");
-			if (loginperm.equals("고객")) {
-				logger.info("고객 로그인");
-				if (loginstate.equals("정지")) {
-					model.addAttribute("msg","정지된 아이디 입니다");
-				}else{
-					session.setAttribute("loginId",loginId);
-					page = "redirect:/official";				
+		MemberDTO loginInformation = memberService.getLoginInformation(id, pw);
+
+		logger.info(loginInformation + "");
+		String msg = "아이디 또는 비밀번호를 다시 확인해 주세요!";
+		if (loginInformation != null) {
+			if (loginInformation.getPerm().equals("관리자")) {
+				page = "redirect:/admin/memberList.go";
+				session.setAttribute("isAdmin", loginInformation.getPerm());
+			} else {
+				if (loginInformation.getState().equals("정지")) {
+					msg = "정지된 회원 입니다.";
+				} else {
+					session.setAttribute("loginId", loginInformation.getId());
+					page = "redirect:/official";
 				}
 			}
-			if (loginperm.equals("관리자")) {
-				logger.info("관리자 로그인");
-				session.setAttribute("loginId",loginId);
-				page = "redirect:/admin/memberList.go";
-			}
-		}else {
-			model.addAttribute("msg","아이디 또는 비빌번호를 확인 해주세요");	
-			
 		}
-		
+		model.addAttribute("msg", msg);
+
+//		if (loginId != null) {
+//			logger.info("로그인 아이디 정보 있음");
+//			if (loginperm.equals("고객")) {
+//				logger.info("고객 로그인");
+//				if (loginstate.equals("정지")) {
+//					model.addAttribute("msg", "정지된 아이디 입니다");
+//				} else {
+//					session.setAttribute("loginId", loginId);
+//					page = "redirect:/official";
+//				}
+//			}
+//			if (loginperm.equals("관리자")) {
+//				logger.info("관리자 로그인");
+//				session.setAttribute("loginId", loginId);
+//				page = "redirect:/admin/memberList.go";
+//			}
+//		} else {
+//			model.addAttribute("msg", "아이디 또는 비빌번호를 확인 해주세요");
+//
+//		}
+
 		return page;
 	}
-	
-	//회원 가입 이동
+
+	// 회원 가입 이동
 	@RequestMapping(value = "/Join.go")
 	public String JoinGo() {
 		return "member/Join";
 	}
-	
-	//회원 가입
-	@RequestMapping(value = "/Join.do",method = RequestMethod.POST)
-	public String Join(Model model,@RequestParam Map<String,String>param) {
+
+	// 회원 가입
+	@RequestMapping(value = "/Join.do", method = RequestMethod.POST)
+	public String Join(Model model, @RequestParam Map<String, String> param) {
 		String page = "member/Join";
 		String msg = "다시 회원 가입을 해주세요.";
-		logger.info("회원가입 : {}",param);
-		
+		logger.info("회원가입 : {}", param);
+
 		int row = memberService.Join(param);
-		logger.info("row : "+row);
-		if (row>0) {
+		logger.info("row : " + row);
+		if (row > 0) {
 			msg = "회원 가입 되었습니다.";
 			page = "member/login";
-			model.addAttribute("msg",msg);
+			model.addAttribute("msg", msg);
 		}
-		
-		return page; 
+
+		return page;
 	}
-	
-	//회원 가입 (아이디 중복 체크)
+
+	// 회원 가입 (아이디 중복 체크)
 	@RequestMapping(value = "/overlay.ajax")
 	@ResponseBody
-	public Map<String, Object> overlay(String id){
-		logger.info("id : "+id);
+	public Map<String, Object> overlay(String id) {
+		logger.info("id : " + id);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("use", memberService.overlay(id));
-		logger.info("map : {}",map);
-		
+		logger.info("map : {}", map);
+
 		return map;
 	}
 
 }
-

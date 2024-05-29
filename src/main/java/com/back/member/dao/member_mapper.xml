@@ -5,12 +5,16 @@
 
 <mapper namespace="com.back.member.dao.MemberDAO">
 	
-	<select id="loginId" resultType="String">
-		SELECT id FROM member WHERE id=#{param1} and pw=#{param2}
-	</select>
+<!-- 	<select id="loginId" resultType="String"> -->
+<!-- 		SELECT id FROM member WHERE id=#{param1} and pw=#{param2} -->
+<!-- 	</select> -->
 	
-	<select id="loginperm" resultType="com.back.member.dto.MemberDTO">
-		SELECT perm,state FROM member WHERE id=#{param1} and pw=#{param2}
+<!-- 	<select id="loginperm" resultType="com.back.member.dto.MemberDTO"> -->
+<!-- 		SELECT perm,state FROM member WHERE id=#{param1} and pw=#{param2} -->
+<!-- 	</select> -->
+
+	<select id="getLoginInformation" resultType="com.back.member.dto.MemberDTO">
+		SELECT * FROM member WHERE id = #{param1} AND pw = #{param2}
 	</select>
 	
 	<insert id="Join" parameterType="map">

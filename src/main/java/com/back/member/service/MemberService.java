@@ -14,27 +14,26 @@ import com.back.member.dto.MemberDTO;
 public class MemberService {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
-	@Autowired MemberDAO memberDAO;
-	
-	public String login(String id, String pw) {
-		logger.info("로그인 서비스 접근");
-		String loginId = memberDAO.loginId(id,pw);
-		logger.info("loginId : "+loginId);
-		return loginId;
-	}
+	@Autowired
+	MemberDAO memberDAO;
+
 	public int Join(Map<String, String> param) {
 		int row = memberDAO.Join(param);
 		return row;
 	}
-	
-	public Object overlay(String id) {	
+
+	public Object overlay(String id) {
 		return memberDAO.overlay(id);
 	}
-	
-	// 고객, 관리자 구별
-	public MemberDTO loginperm(String id, String pw) {
-		
-		return memberDAO.loginperm(id,pw);
+
+	/**
+	 * id,pw 파라메터로 넣으면 유저 정보 MemberDTO 형태로 반환 
+	 * @param String id
+	 * @param String pw
+	 * @return MemberDTO
+	 */
+	public MemberDTO getLoginInformation(String id, String pw) {
+		return memberDAO.getLoginInformation(id, pw);
 	}
-	
+
 }
