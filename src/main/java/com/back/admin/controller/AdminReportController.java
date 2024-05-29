@@ -26,10 +26,10 @@ public class AdminReportController {
 
 	@RequestMapping(value = "/admin/reportList.go")
 	public String reportListGo(HttpSession session) {
-//		String isAdmin = (String) session.getAttribute("isAdmin");
-//		if (isAdmin == null || isAdmin.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		return "/admin/report_list";
 	}
 
@@ -44,10 +44,10 @@ public class AdminReportController {
 
 	@RequestMapping(value = "/admin/reportDetail.go")
 	public String reportDetailGo(HttpSession session, Model model, String reportIdx) {
-//		String isAdmin = (String) session.getAttribute("isAdmin");
-//		if (isAdmin == null || isAdmin.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		logger.info("reportDetailGo " + reportIdx);
 		model.addAttribute("reportIdx", reportIdx);
 		return "/admin/feed";

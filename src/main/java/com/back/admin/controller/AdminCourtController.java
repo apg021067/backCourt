@@ -26,11 +26,11 @@ public class AdminCourtController {
 
 	@RequestMapping(value = "/admin/courtList.go")
 	public String listGo(HttpSession session) {
-//		String isAdmin = "";
-//		isAdmin = (String) session.getAttribute("isAdmin");
-//		if (isAdmin == null || isAdmin.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		logger.info(isAdmin);
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		return "/admin/court_list";
 	}
 
@@ -46,10 +46,10 @@ public class AdminCourtController {
 
 	@RequestMapping(value = "/admin/courtWrite.go")
 	public String WriteGo(HttpSession session) {
-//		String isAdmin = (String) session.getAttribute("isAdmin");
-//		if (isAdmin == null || isAdmin.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		return "/admin/court_register";
 	}
 
@@ -83,10 +83,10 @@ public class AdminCourtController {
 
 	@RequestMapping(value = "/admin/courtDetail.go")
 	public String DetailGo(HttpSession session, String courtIdx, Model model) {
-//		String isAdmin = (String) session.getAttribute("isAdmin");
-//		if (isAdmin == null || isAdmin.isEmpty()) {
-//			return "redirect:/login.go";
-//		}
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		logger.info(courtIdx);
 		adminCourtService.detailLoad(courtIdx, model);
 		return "/admin/court_update";

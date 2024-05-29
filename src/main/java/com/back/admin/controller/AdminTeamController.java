@@ -25,7 +25,11 @@ public class AdminTeamController {
 	AdminTeamService adminTeamService;
 
 	@RequestMapping(value = "/admin/team_list.go")
-	public String listGo() {
+	public String listGo(HttpSession session) {
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		logger.info("팀관리 리스트 페이지 접속");
 		return "/admin/team_list";
 	}
@@ -40,6 +44,10 @@ public class AdminTeamController {
 	@RequestMapping(value = "/admin/team_detail.go")
 	public String detailGo(HttpSession session, String teamIdx, Model model) {
 		logger.info("teamDetailPage Controller 접속");
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
 		adminTeamService.teamInfo(teamIdx, model);
 		return "/admin/team_detail";
 	}
@@ -49,75 +57,46 @@ public class AdminTeamController {
 	public Map<String, Object> teammateList(String teamIdx, String currentPage) {
 		return adminTeamService.teammateList(teamIdx, currentPage);
 	}
-	
-	
+
 	@RequestMapping(value = "/admin/teamUpdate.ajax")
 	@ResponseBody
-	public Map<String, Boolean> teamUpdate(@RequestParam Map<String, Object> param){
-		logger.info("teamUpdate param : {}",param);
+	public Map<String, Boolean> teamUpdate(@RequestParam Map<String, Object> param) {
+		logger.info("teamUpdate param : {}", param);
 		return adminTeamService.teamUpdate(param);
 	}
-	
+
 	// 팀원 모집글 상세보기
 	@RequestMapping(value = "/admin/team_member_update.go")
-	public String teamMemberDetailGo(String join_team_idx, Model model) {
+	public String teamMemberDetailGo(HttpSession session, String join_team_idx, Model model) {
 		logger.info("팀원모집 상세 페이지 접속");
-		
+		String isAdmin = (String) session.getAttribute("isAdmin");
+		if (isAdmin == null || isAdmin.isEmpty()) {
+			return "redirect:/login.go";
+		}
+
 		AdminTeamDTO dto = adminTeamService.teamMemberDetail(join_team_idx);
-		
+
 		model.addAttribute("info", dto);
-		
+
 		return "/admin/team_member_update";
 	}
-	
+
 	// 팀원 모집글 수정
 	@RequestMapping(value = "/admin/team_member_update/update.ajax")
 	@ResponseBody
-	public Map<String, Object> teamMemberUpdateGo(String join_team_idx, String requInfo, String level, String teamIsDisabled) {
+	public Map<String, Object> teamMemberUpdateGo(String join_team_idx, String requInfo, String level,
+			String teamIsDisabled) {
 		logger.info("팀원모집 수정 요청");
 		logger.info("requInfo : {}, level : {}", requInfo, level);
 		logger.info("teamIsDisabled : {}, join_team_idx : {}", teamIsDisabled, join_team_idx);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		int row = adminTeamService.teamMemberUpdate(join_team_idx, requInfo, level, teamIsDisabled);
 		map.put("row", row);
 		logger.info(String.valueOf(row));
-		
+
 		return map;
 	}
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
