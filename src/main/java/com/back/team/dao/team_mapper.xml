@@ -117,13 +117,24 @@
 	
 	<select id="writeTotal" resultType="int">
 		SELECT 
-			ceil(((select count(team_idx) 
-			from team_join 
-			where team_idx = #{param1} AND join_team_state = "true") + 
-			(SELECT COUNT(guest_idx) FROM guest_join gj WHERE gj.id = #{param2}))/10)
-			AS totalPage
-			FROM guest_join
-			GROUP BY id
+		    CEIL((tj.team_count + gj.guest_count) / 10.0) AS totalPage
+		FROM (
+		    SELECT 
+		        COUNT(team_idx) AS team_count
+		    FROM 
+		        team_join 
+		    WHERE 
+		        team_idx = #{param1} 
+		        AND join_team_state = "true"
+		) tj
+		JOIN (
+		    SELECT 
+		        COUNT(guest_idx) AS guest_count
+		    FROM
+		        guest_join 
+		    WHERE 
+		        id = #{param2}
+		) gj
 	</select>
 	
 	<select id="listDrop" resultType="com.back.team.dto.TeamDTO">

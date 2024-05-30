@@ -21,7 +21,7 @@ public class AdminTeamService {
 	@Autowired
 	AdminTeamDAO adminTeamDAO;
 
-	private final String ROOT = "/usr/local/tomcat/webapps/teamImage/";
+	private final String ROOT = "/usr/local/tomcat/webapps/teamLogo/";
 
 	public Map<String, Object> teamList(Map<String, Object> param) {
 		logger.info("teamList service in");

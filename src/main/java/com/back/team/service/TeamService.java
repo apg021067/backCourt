@@ -1,7 +1,5 @@
 package com.back.team.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,48 +23,46 @@ public class TeamService {
 	@Autowired
 	TeamDAO teamDAO;
 
-	private final String ROOT = "/usr/local/tomcat/webapps/teamImage/";
+	private final String ROOT = "/usr/local/tomcat/webapps/teamLogo/";
 
 	public TeamDTO teamDetail(int team_idx) {
-
 		return teamDAO.teamDetail(team_idx);
 	}
 
 	public Map<String, Object> list(int page, int team_idx, String id) {
-		int start = (page - 1) * 10;
-		int limitNum = 0;
-		if (start == 0) {
-			limitNum = 9;
-		} else {
-			limitNum = 10;
-		}
-		Map<String, Object> result = new HashMap<String, Object>();
-		List<TeamDTO> listTeam = teamDAO.listTeam(start, team_idx);
-		// 팀원 신청내역
-		List<TeamDTO> listAppli = teamDAO.listAppli(start, team_idx);
-		// 게스트 신청내역
-		List<TeamDTO> listAppliGuest = teamDAO.listAppliGuest(start, team_idx);
+        int start = (page - 1) * 10;
+        int limitNum = 0;
+        if (start == 0) {
+            limitNum = 9;
+        } else {
+            limitNum = 10;
+        }
+        Map<String, Object> result = new HashMap<>();
+        List<TeamDTO> listTeam = teamDAO.listTeam(start, team_idx);
+        // 팀원 신청내역
+        List<TeamDTO> listAppli = teamDAO.listAppli(start, team_idx);
+        // 게스트 신청내역
+        List<TeamDTO> listAppliGuest = teamDAO.listAppliGuest(start, team_idx);
 
-		List<TeamDTO> listWriteTeam = teamDAO.listWriteTeam(team_idx, id);
-		List<TeamDTO> listWriteGuest = teamDAO.listWriteGuest(start, team_idx, id, limitNum);
-		List<TeamDTO> listDrop = teamDAO.listDrop(start, team_idx);
+        List<TeamDTO> listWriteTeam = teamDAO.listWriteTeam(team_idx, id);
+        List<TeamDTO> listWriteGuest = teamDAO.listWriteGuest(start, team_idx, id, limitNum);
+        List<TeamDTO> listDrop = teamDAO.listDrop(start, team_idx);
+        int totalPageWrite = teamDAO.writeTotal(team_idx, id);
+        logger.info(totalPageWrite+"");
+        result.put("listTeam", listTeam);
+        result.put("totalPageTeam", teamDAO.teamTotal(team_idx));
+        result.put("listAppli", listAppli);
+        result.put("totalPageAppli", teamDAO.appliTotal(team_idx));
+        result.put("listAppliGuest", listAppliGuest);
+        result.put("totalPageAppliGuest", teamDAO.appliGuestTotal(team_idx));
+        result.put("listWriteTeam", listWriteTeam);
+        result.put("listWriteGuest", listWriteGuest);
+        result.put("totalPageWrite", teamDAO.writeTotal(team_idx, id));
+        result.put("listDrop", listDrop);
+        result.put("totalPageDrop", teamDAO.dropTotal(team_idx));
 
-		result.put("listTeam", listTeam);
-		result.put("totalPageTeam", teamDAO.teamTotal(team_idx));
-		result.put("listAppli", listAppli);
-		result.put("totalPageAppli", teamDAO.appliTotal(team_idx));
-		//
-		result.put("listAppliGuest", listAppliGuest);
-		result.put("totalPageAppliGuest", teamDAO.appliGuestTotal(team_idx));
-		//
-		result.put("listWriteTeam", listWriteTeam);
-		result.put("listWriteGuest", listWriteGuest);
-		result.put("totalPageWrite", teamDAO.writeTotal(team_idx, id));
-		result.put("listDrop", listDrop);
-		result.put("totalPageDrop", teamDAO.dropTotal(team_idx));
-
-		return result;
-	}
+        return result;
+    }
 
 	public TeamDTO userPop(String userId) {
 		return teamDAO.userPop(userId);
@@ -95,8 +91,6 @@ public class TeamService {
 			teamDAO.sendNotice(msg, userId);
 		}
 
-//		teamDAO.delJoinList(idx)
-
 		return 1;
 	}
 
@@ -116,8 +110,7 @@ public class TeamService {
 	public int destroyTeam(int team_idx, String id) {
 		List<String> list = teamDAO.searchTeam(team_idx);
 		String teamName = teamDAO.teamName(team_idx);
-		String msg = "";
-		msg = teamName + " 팀이 해체되었습니다.";
+		String msg = teamName + " 팀이 해체되었습니다.";
 
 		for (String user : list) {
 			teamDAO.sendNotice(msg, user);
@@ -144,24 +137,30 @@ public class TeamService {
 
 		if (row > 0) {
 			row = teamDAO.insertTeamList(id, idx);
-			fileSave(photo, idx);
+			fileSave(photo, idx, dto.getLogo());
 		}
 
 		return idx;
 	}
 
-	private void fileSave(MultipartFile photo, int idx) {
-
+	private void fileSave(MultipartFile photo, int idx, String logoName) {
 		String newFileName = "team_logo" + idx;
 		logger.info(newFileName);
 		Path filePath = Paths.get(ROOT + newFileName + ".png");
+		byte[] bytes;
 		try {
-			byte[] bytes = photo.getBytes();
+			if (photo.getSize() == 0) {
+				Path logoPath = Paths.get(ROOT + logoName + ".png");
+				bytes = Files.readAllBytes(logoPath); // logoName 파일의 내용을 읽음
+				logger.info("siteLogo filePath = " + logoPath + "siteLogo bytes = " + bytes.length);
+			} else {
+				bytes = photo.getBytes(); // photo의 내용을 읽음
+				logger.info("uploadLogo filePath = " + filePath + "uploadLogo bytes = " + bytes.length);
+			}
 			Files.write(filePath, bytes);
 			teamDAO.updateLogo(newFileName, idx);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

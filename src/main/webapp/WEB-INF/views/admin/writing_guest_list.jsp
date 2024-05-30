@@ -97,7 +97,7 @@
                                 <td class="recruitment">5</td>
                                 <td class="logo">
                                     <div>
-                                        <img src="/logoImage/team_logo01.jpg" alt="">
+                                        <img src="/teamLogo/team_logo01.jpg" alt="">
                                     </div>
                                 </td>
                                 <td>공개</td>
@@ -113,7 +113,7 @@
                                 <td class="recruitment">5</td>
                                 <td class="logo">
                                     <div>
-                                        <img src="/logoImage/team_logo01.jpg" alt="">
+                                        <img src="/teamLogo/team_logo01.jpg" alt="">
                                     </div>
                                 </td>
                                 <td>공개</td>
@@ -249,7 +249,7 @@
             	+'<td class="recruitment">' + remainingNum + '</td>'
             	+'<td class="logo">'
             	+'<div>'
-            	+'<img src="/logoImage/' + item.logo + '.png" alt="">'
+            	+'<img src="/teamLogo/' + item.logo + '.png" alt="">'
             	+'</div>'
             	+'</td>'
             	+'<td>' + item.guest_state + '</td>'

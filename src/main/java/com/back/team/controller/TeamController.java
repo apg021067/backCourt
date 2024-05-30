@@ -1,5 +1,6 @@
 package com.back.team.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,30 +24,31 @@ import com.back.team.service.TeamService;
 public class TeamController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
-	@Autowired TeamService teamService;
-	
+	@Autowired
+	TeamService teamService;
+
 	@RequestMapping(value = "/team")
 	public String official() {
 		return "redirect:/team/info_list.go";
 	}
-	
+
 	@RequestMapping(value = "/team/info_list.go")
 	public String listGo(HttpSession session, Model model, int team_idx) {
 		logger.info("info_list.go /");
 		String id = (String) session.getAttribute("loginId");
-		
+
 		TeamDTO dto = teamService.teamDetail(team_idx);
 		model.addAttribute("info", dto);
 		model.addAttribute("id", id);
-		
+
 		logger.info(dto.getId());
 		logger.info(id);
-		
+
 		return "team/info_list";
 	}
-	
+
 	// 리스트
-	@RequestMapping(value = "/team/info_list.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/team/info_list.ajax")
 	@ResponseBody
 	public Map<String, Object> callList(HttpSession session, String currentPage, int team_idx) {
 		logger.info("listCall / currentPage = {} / team_idx = {} / ", currentPage, team_idx);
@@ -56,21 +58,21 @@ public class TeamController {
 
 		return map;
 	}
-	
+
 	// 유저 상세 팝업
 	@RequestMapping(value = "/team/user_pop.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> userPop(String userId) {
 		logger.info("listCall / userId = {} / ", userId);
-		
+
 		TeamDTO list = teamService.userPop(userId);
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("list", list);
-		
+
 		return map;
 	}
-	
+
 	// 회원 추방
 	@RequestMapping(value = "/team/drop_member.ajax", method = RequestMethod.POST)
 	@ResponseBody
@@ -78,14 +80,14 @@ public class TeamController {
 		logger.info("listCall / team_idx = {} / ", team_idx);
 		logger.info("listCall / userId = {} / ", userId);
 		int row = teamService.dropMember(team_idx, userId);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("list", row);
-		
+
 		return map;
 	}
-	
+
 	// 신청 수락, 거부
 	@RequestMapping(value = "/team/appli_member.ajax", method = RequestMethod.POST)
 	@ResponseBody
@@ -94,32 +96,32 @@ public class TeamController {
 		logger.info("listCall / userId = {} / ", userId);
 		logger.info("listCall / idx = {} / ", idx);
 		logger.info("listCall / num = {} / ", num);
-		
+
 		int row = teamService.appliMember(team_idx, userId, idx, num);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("row", row);
-		
+
 		return map;
 	}
-	
+
 	// 팀, 게스트 모집글 삭제
 	@RequestMapping(value = "/team/delete_write.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delteWrite(int idx, int num) {
 		logger.info("listCall / idx = {} / ", idx);
 		logger.info("listCall / num = {} / ", num);
-		
+
 		int row = teamService.delteWrite(idx, num);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("row", row);
-		
+
 		return map;
 	}
-	
+
 	// 팀 삭제
 	@RequestMapping(value = "/team/destroy_team.ajax", method = RequestMethod.POST)
 	@ResponseBody
@@ -127,60 +129,42 @@ public class TeamController {
 		logger.info("listCall / team_idx = {} / ", team_idx);
 		String id = (String) session.getAttribute("loginId");
 		int row = teamService.destroyTeam(team_idx, id);
-		
+
 		Map<String, Object> map = new HashMap<String, Object>();
-		
+
 		map.put("row", row);
-		
+
 		return map;
 	}
-	
+
 	@RequestMapping(value = "/team/create.go")
 	public String createTeam(HttpSession session, Model model) {
 		logger.info("create.go /");
 		return "team/create";
 	}
-	
+
 	@RequestMapping(value = "/team/create.do", method = RequestMethod.POST)
 	public String createComplete(MultipartFile photo, HttpSession session, @RequestParam Map<String, String> param) {
-		logger.info("팀 만들기 요청");
+		try {
+			logger.info("\n팀 만들기 요청 fileFileName = " + photo.getOriginalFilename() + "\n팀 만들기 요청 fileSize = "
+					+ photo.getSize() + "\n팀 만들기 요청 fileType = " + photo.getContentType() + "\n팀 만들기 요청 fileBytes = "
+					+ photo.getBytes());
+		} catch (IOException e) {
+			logger.error("bytes오" + e);
+		}
+
+		logger.info("Req CreateTeam Param = {}", param);
+		
 		String page = "login";
 		String id = (String) session.getAttribute("loginId");
 		int idx = 0;
-		
-		if(id != null) {
+
+		if (id != null) {
 			idx = teamService.createComplete(photo, param, id);
 			page = "redirect:/team/info_list.go?team_idx=" + idx;
 		}
-		
+
 		return page;
 	}
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

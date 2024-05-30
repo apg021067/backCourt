@@ -288,7 +288,7 @@ function showList(list){
        content +=
           '<tr class="' + finishClass + '">'
        +'<td class="num">' + item.join_team_idx + '</td>'
-       +'<td class="logo"><img class="teammateImage" src="/logoImage/' + item.logo +'.png" alt="teammateLogo"></td>'
+       +'<td class="logo"><img class="teammateImage" src="/teamLogo/' + item.logo +'.png" alt="teammateLogo"></td>'
        +'<td class="teamName">' + item.team_name +'</td>'
        +'<td class="representID">' + item.id + '</td>'
        +'<td class="address"><a href="' + link + '">서울시 ' + item.team_address.split(' ')[1] + '</a></td>'

@@ -19,14 +19,14 @@
         <form action="./create.do" method="post" enctype="multipart/form-data">
             <div class="leftCont">
                 <div class="imgBox" id="imgBox">
-                    <img id="img" src="/logoImage/default_logo.png" alt="">
+                    <img id="img" src="/teamLogo/default_logo.png" alt="">
                 </div>
                 <button type="button" class="siteLogo">로고 선택</button>
                 <!-- 최종 로고 저장 장소 -->
                 <input type="hidden" name="sitePhotos" id="sitePhotos">
                 <!-- 최종 로고 저장 장소 -->
                 <label class="inputFileButton" for="inputFile">내 PC 에서 찾기</label>
-                <input id="inputFile" class="pcLogo" type="file" name="photo"/>
+                <input id="inputFile" class="pcLogo" type="file" name="photo" hidden="true"/>
             </div>
             <div class="rightCont">
                 <p>
@@ -80,25 +80,25 @@
         <div class="popWrap">
             <div class="logoCont">
                 <ul>
-                    <li><img src="/logoImage/team_siteLogo01.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo02.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo03.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo04.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
-                    <li><img src="/logoImage/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo01.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo02.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo03.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo04.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
+                    <li><img src="/teamLogo/team_siteLogo05.png" alt=""></li>
                 </ul>
             </div>
             <button class="selectBtn">선택완료</button>
@@ -114,49 +114,50 @@
     var fileName = '';
     var newFileName = '';
 
-    // logo 팝업
+ // logo 팝업
     $('.siteLogo').on('click',function(){
         $('.logoPop').addClass('on');
         $('.curtain').addClass('on');
         $('html').addClass('on');
     });
+
     $('.close').on('click',function(){
         $('.logoPop').removeClass('on');
         $('.curtain').removeClass('on');
         $('html').removeClass('on');
     });
+
     $('.logoCont li').on('click',function(){
         $(this).addClass('on').siblings().removeClass('on');
-
         imgSrc = $(this).children('img').attr('src');
-        logoName = imgSrc.substring(imgSrc.lastIndexOf('\/') + 1);
+        logoName = imgSrc.substring(imgSrc.lastIndexOf('/') + 1);
         newLogoName = logoName.substring(0, logoName.lastIndexOf('.'));
         console.log(newLogoName);
     });
 
     // 이미지 선택완료
     $('.selectBtn').on('click',function(){
-    	var imgContent = '';
-    	
+        var imgContent = '';
+        
         $('.logoPop').removeClass('on');
         $('.curtain').removeClass('on');
         $('html').removeClass('on');
-
-        $('#sitePhotos').val(newLogoName);
-        console.log($('#sitePhotos').val());
         
-        imgContent +=
-        	'<img id="img" src="/logoImage/' + newLogoName + '.png" alt="">';
-        
-        $('#imgBox').html(imgContent);
+        if (newLogoName) {
+            $('#sitePhotos').val(newLogoName);
+            console.log($('#sitePhotos').val());
+            
+            imgContent = '<img id="img" src="/teamLogo/' + newLogoName + '.png" alt="">';
+            $('#imgBox').html(imgContent);
+        }
         
         $('.pcLogo').val('');
     });
 
     // 내 pc 에서 이미지 선택
     $('.pcLogo').on('change',function(){
-    	var imgContent = '';
-    	
+        var imgContent = '';
+        
         val = $('.pcLogo').val();
         console.log(val);
         fileName = val.substring(val.lastIndexOf('\\') + 1);
@@ -167,123 +168,84 @@
         console.log($('#sitePhotos').val());
         
         previewFile();
-        // 내 pc 이미지 저장 ajax 실행
-        /* logoStorage(); */
     });
- 	
- 	// 내 pc 에서 사진 선택하기 미리보기
+
+    // 내 pc 에서 사진 선택하기 미리보기
     function previewFile() {
-    	  var preview = document.querySelector("#img");
-    	  var file = document.querySelector("input[type=file]").files[0];
-    	  var reader = new FileReader();
+        var preview = document.querySelector("#img");
+        var file = document.querySelector("input[type=file]").files[0];
+        var reader = new FileReader();
 
-    	  reader.addEventListener(
-    	    "load",
-    	    function () {
-    	      preview.src = reader.result;
-    	    },
-    	    false,
-    	  );
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
 
-    	  if (file) {
-    	    reader.readAsDataURL(file);
-    	  }
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
- 	
- 	// 취소 버튼
- 	$('#cancle').on('click',function(){
- 		cancle();
- 	});
- 	
- 	// 완료 버튼 유효성 검사
- 	$('#complete').on('click',function(){
- 		validChk();
- 	});
- 	
- 	function validChk(){
- 		
- 		var testNikName = $('.teamName');
- 		var address = $('#address');
- 		var level = $('input[name="level"]:checked');
- 		var description = $('#description');
- 		var sitePhotos = $('#sitePhotos');
- 		var inputFile = $('#inputFile');
- 		
- 		
- 		console.log('--------------------------------');
- 		console.log(testNikName);
- 		console.log(address);
- 		console.log(level);
- 		console.log(description);
- 		console.log(sitePhotos);
- 		console.log(inputFile);
- 		
- 		if(testNikName.val() == ''){
- 			alert('팀 이름을 입력해주세요');
- 			testNikName.focus();
- 		}else if(address.val() == ''){
- 			alert('주소를 선택해주세요');
- 			address.focus();
- 		}else if(level.val() == null){
- 			alert('레벨을 선택해주세요');
- 			level.focus();
- 		}else if(description.val() == ''){
- 			alert('팀정보를 입력해주세요');
- 			description.focus();
- 		}else if(sitePhotos.val() == '' && inputFile.val() == ''){
- 			alert('로고를 선택해주세요');
- 		}else{
- 			console.log('서버로 요청');
- 			
- 			var cf = '';
- 			cf = confirm('팀을 만드시겠습니까?');
- 			if(cf){
-	 			$('form').submit();
- 			}
- 			
- 		}
- 		
- 	}
- 	
- 	function cancle(){
- 		var cf = '';
- 		cf = confirm('취소하시겠습니까?');
- 		if(cf){
- 			window.history.back();
- 		}
- 		
- 	}
+
+    // 취소 버튼
+    $('#cancle').on('click',function(){
+        cancle();
+    });
+
+    // 완료 버튼 유효성 검사
+    $('#complete').on('click',function(){
+        validChk();
+    });
+
+    function validChk(){
+        var testNikName = $('.teamName');
+        var address = $('#address');
+        var level = $('input[name="level"]:checked');
+        var description = $('#description');
+        var sitePhotos = $('#sitePhotos');
+        var inputFile = $('#inputFile');
+        
+        console.log('--------------------------------');
+        console.log(testNikName);
+        console.log(address);
+        console.log(level);
+        console.log(description);
+        console.log(sitePhotos);
+        console.log(inputFile);
+        
+        if(testNikName.val() == ''){
+            alert('팀 이름을 입력해주세요');
+            testNikName.focus();
+        } else if(address.val() == ''){
+            alert('주소를 선택해주세요');
+            address.focus();
+        } else if(level.val() == null){
+            alert('레벨을 선택해주세요');
+            level.focus();
+        } else if(description.val() == ''){
+            alert('팀정보를 입력해주세요');
+            description.focus();
+        } else if(sitePhotos.val() == '' && inputFile.val() == ''){
+            alert('로고를 선택해주세요');
+        } else {
+            console.log('서버로 요청');
+            var cf = '';
+            cf = confirm('팀을 만드시겠습니까?');
+            if(cf){
+                // 이미지를 input[type=file]에 설정
+                if (imgSrc) {
+                    $('#inputFile').attr('src', imgSrc);
+                }
+                $('form').submit();
+            }
+        }
+    }
+
+    function cancle(){
+        var cf = '';
+        cf = confirm('취소하시겠습니까?');
+        if(cf){
+            window.history.back();
+        }
+    }
 
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

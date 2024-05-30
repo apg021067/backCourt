@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게스트 모집 게시판</title>
-<link rel="icon" href="/logoImage/logo.png">
+<link rel="icon" href="/teamLogo/logo.png">
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
