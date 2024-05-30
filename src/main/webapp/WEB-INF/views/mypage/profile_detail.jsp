@@ -70,9 +70,9 @@
                     <th class="profile_detail_th">포지션</th>
                     <td class="profile_detail_td_select">
                         <select name="Position" class="select" id="Position">
-                            <option value="Guard">가드</option>
-                            <option value="Forward">포워드</option>
-                            <option value="Center">센터</option>
+                            <option value="가드">가드</option>
+                            <option value="포워드">포워드</option>
+                            <option value="센터">센터</option>
                         </select>
                     </td>
                 </tr>
@@ -80,8 +80,8 @@
                     <th class="profile_detail_th">성별</th>
                     <td class="profile_detail_td">
                         <select name="gender" class="select" id="gender">
-                            <option value="남">남자</option>
-                            <option value="여">여자</option>
+                            <option value="남자">남자</option>
+                            <option value="여자">여자</option>
                         </select>
                     </td>
                 </tr>
@@ -89,10 +89,10 @@
                     <th class="profile_detail_th">레벨</th>
                     <td class="profile_detail_td_select">
                         <select name="Level" class="select" id="Level">
-                            <option value="Bronze">브론즈</option>
-                            <option value="Silver">실버</option>
-                            <option value="Gold">골드</option>
-                            <option value="Platinum" >플래티넘</option>
+                            <option value="브론즈">브론즈</option>
+                            <option value="실버">실버</option>
+                            <option value="골드">골드</option>
+                            <option value="플래티넘" >플래티넘</option>
                         </select>
                     </td>
                 </tr>
