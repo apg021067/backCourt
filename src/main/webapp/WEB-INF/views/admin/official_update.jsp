@@ -315,7 +315,7 @@
 				,success:function(data){
 					console.log(data);
 					if(data.result){
-						window.location.href = './officialList.go';
+						window.location.href = './writing_official_list.go';
 					}else{
 						alert('경기 수정에 실패 했습니다.');
 					}
@@ -381,9 +381,9 @@
 	}
 	function callCourtInfo(idx){
 		
-		$('.officialWriteTimeBtn').css('background-color', 'skyblue');
+		$('.officialUpdateTimeBtn').css('background-color', 'skyblue');
 		
-		$('.officialWriteTimeBtn').each(function() {
+		$('.officialUpdateTimeBtn').each(function() {
 			$(this).prop('disabled', false);
 		});
 		
@@ -460,11 +460,11 @@
 	$('#officialRegisterCancel').on('click',function(){
 		if(confirm('정말 취소 하시겠습니까?')){
 			alert('취소되었습니다.');
-			window.location.href = "./officialList.go";
+			window.location.href = "./writing_official_list.go";
 		}
 	});
 
-	$('.officialUpdateTimeBtn:not([disabled])').click(function() {
+	$('.officialUpdateTimeBtn').click(function() {
 		selectTime = $(this).attr('id');
 		// 모든 버튼의 배경색을 하늘색으로 초기화
 		$('.officialUpdateTimeBtn:not([disabled])').not(this).css('background-color', 'skyblue');

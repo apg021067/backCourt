@@ -38,6 +38,8 @@
         </table>
         <input type="button" value="회원가입" onclick="location.href='/Join'" class=" button">
     </form>
+	    <p>사용자 ID : user01 PW : qwerqwer</p>
+	    <p>관리자 ID : admin_01 PW : admin@pass</p>
     </div>
 </body>
 <script>

@@ -9,14 +9,14 @@ public interface AdminReportDAO {
 
 	AdminReportDTO detail(String reportIdx);
 
-	void update(String reportIdx, String reportState, String reportFeed);
-
-	void feedInsert(String adminId, String reportIdx);
-
 	int totalPage(Map<String, Object> param);
 
 	List<AdminReportDTO> list(Map<String, Object> param);
 
-	void noticeInsert(String findUser, String string);
+	boolean update(Map<String, String> param);
+
+	boolean feedInsert(Map<String, String> param);
+
+	boolean noticeInsert(Map<String, String> param);
 
 }

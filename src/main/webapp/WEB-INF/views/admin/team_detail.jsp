@@ -152,7 +152,7 @@
 					<div class="leftCont">
 						<div class="imgContainer">
 							<div class="imgBox" id="imgBox">
-								<img class="teamLogo" src="/teamLogo/${teamInfo.logo}.jpg" alt="" />
+								<img class="teamLogo" src="/teamLogo/${teamInfo.logo}.png" alt="" />
 							</div>
 						</div>
 						<div class="teamInfoContainer">
@@ -224,7 +224,7 @@
 	        $('.siteLogo').on('click', function() {
 	            // 기본 이미지 URL로 변경합니다.
 	            logoFlag = true;
-	            $('#imgBox').html('<img class="teamLogo" src="/teamLogo/defaultLogo.jpg	" alt="" />');
+	            $('#imgBox').html('<img class="teamLogo" src="/teamLogo/default_logo.png" alt="" />');
 	        });
 	    });
 		

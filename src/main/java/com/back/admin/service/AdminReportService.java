@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.back.admin.dao.AdminReportDAO;
 import com.back.admin.dto.AdminReportDTO;
@@ -48,19 +49,20 @@ public class AdminReportService {
 		return map;
 	}
 
-	public Map<String, Object> update(String adminId, String reportIdx, String reportState, String reportFeed,
-			String reportId) {
+	@Transactional
+	public Map<String, Object> update(Map<String, String> param) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		adminReportDAO.update(reportIdx, reportState, reportFeed);
-		logger.info("params id = " + reportId + " reportIdx = " + reportIdx);
-		try {
-			adminReportDAO.feedInsert(adminId, reportIdx);
-			adminReportDAO.noticeInsert(reportId, "문의상태가 변경");
-		} catch (Exception e) {
-			map.put("result", false);
+		boolean result = false;
+		param.put("notice_content", "문의 상태 변경");
+
+		logger.info("\nupdate param = {}", param);
+		if (adminReportDAO.update(param) && adminReportDAO.feedInsert(param) && adminReportDAO.noticeInsert(param)) {
+			result = true;
 		}
-		map.put("result", true);
+
+		logger.info("feedUpdate result = " + result);
+		map.put("result", result);
 		return map;
 	}
 

@@ -47,6 +47,7 @@ public class MemberController {
 			if (loginInformation.getPerm().equals("관리자")) {
 				page = "redirect:/admin/memberList.go";
 				session.setAttribute("isAdmin", loginInformation.getPerm());
+				session.setAttribute("loginId", loginInformation.getId());
 			} else {
 				if (loginInformation.getState().equals("정지")) {
 					msg = "정지된 회원 입니다.";

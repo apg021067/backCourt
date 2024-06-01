@@ -38,6 +38,10 @@
 .teamIdx { 
 	display: none;
 }
+img{
+	width: 50px;
+	height: 50px;
+}
 </style>
 </head>
 <body>
@@ -159,10 +163,10 @@
 	function showList(list){
 		var content = '';
 		for(item of list){
-			console.log(item.team_idx);
+			console.log(item);
 			content +=
 				'<tr class="adminteamListTr">'
-				+'<td class="adminteamListTd"><img class="logo" src="/teamLogo/'+ item.logo +'.jpg" alt="" /><span class="teamIdx">'+ item.team_idx+'</span></td>'
+				+'<td class="adminteamListTd"><img class="logo" src="/teamLogo/'+ item.logo+'.png" alt="" /><span class="teamIdx">'+ item.team_idx+'</span></td>'
 				+'<td class="adminteamListTd">'+item.team_name+'</td>'
 				+'<td class="adminteamListTd">'+item.team_address+'</td>'
 				+'<td class="adminteamListTd">'+item.id+'</td>'

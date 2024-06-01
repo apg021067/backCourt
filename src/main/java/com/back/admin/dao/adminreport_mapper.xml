@@ -58,19 +58,19 @@
 		
 	</select>
 
-	<update id="update" parameterType="String">
+	<update id="update" parameterType="map">
 		UPDATE report
-		SET report_state = #{param2}, report_feed = #{param3}
-		WHERE report_idx = #{param1}
+		SET report_state = #{reportState}, report_feed = #{reportFeed}
+		WHERE report_idx = #{reportIdx}
 	</update>
 
-	<insert id="feedInsert" parameterType="String">
-		INSERT INTO feed(id,report_idx) values(#{param1},#{param2})
+	<insert id="feedInsert" parameterType="map">
+		INSERT INTO feed(id,report_idx,feed_content) values(#{adminId},#{reportIdx},#{reportFeed})
 	</insert>
 
 	
-	<insert id="noticeInsert" parameterType="String">
-		INSERT INTO notice(id,notice_content) values(#{param1},#{param2})
+	<insert id="noticeInsert" parameterType="map">
+		INSERT INTO notice(id,notice_content) values(#{reportId},#{notice_content})
 	</insert>
 
 </mapper>

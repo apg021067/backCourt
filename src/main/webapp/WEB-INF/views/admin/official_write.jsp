@@ -435,7 +435,7 @@ function callCourtInfo(idx){
 $('#officialRegisterCancel').on('click',function(){
 	if(confirm('정말 취소 하시겠습니까?')){
 		alert('취소되었습니다.');
-		window.location.href = "./officialList.go";
+		window.location.href = "./writing_official_list.go";
 	}
 });
 

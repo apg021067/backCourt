@@ -155,7 +155,7 @@
     })
 	function numChk(){
 		var numChk = $('#noticeNum').html();
-		console.log(numChk);
+// 		console.log(numChk);
     	if(numChk <= 1){
 			$('#noticeNum').removeClass('on');
 		}
@@ -169,7 +169,7 @@
 			data : {},
 			dataType : 'json',
 			success : function(data){ 
-				console.log(data.sessionCk);
+// 				console.log(data.sessionCk);
 				if(data.sessionCk == true){
 					sessionCheck = 'true';
 					drawInfo(data.info);
@@ -230,7 +230,7 @@
 			data : {},
 			dataType : 'json',
 			success : function(data){ 
-				console.log(data.list);
+// 				console.log(data.list);
 				if(data.list != ''){
 					$('.popup').addClass('on');
 		            $('.curtain').addClass('on');
@@ -286,8 +286,8 @@
 				drawNoticeList(data.list);
 				drawCountList(data.count);
 				
-				console.log(data.list);
-				console.log(data.count);
+// 				console.log(data.list);
+// 				console.log(data.count);
 				
 				if(on != 'on'){
 					$('.noticeBox').addClass('on');

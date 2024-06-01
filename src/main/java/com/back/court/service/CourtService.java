@@ -27,7 +27,7 @@ public class CourtService {
 	public Map<String, Object> list(Map<String, Object> param) {
 		// 시작 페이지
 		int start = (Integer.parseInt((String) param.get("currentPage")) - 1) * 10;
-		
+
 		param.put("start", start);
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -38,7 +38,7 @@ public class CourtService {
 		map.put("addressList", processedAddress(courtDAO.addressList()));
 		// 총 페이지
 		int totalPage = courtDAO.totalPage(param);
-		
+
 		if (totalPage / 10 == 0) {
 			totalPage = 1;
 		} else if (totalPage % 10 > 0) {
@@ -46,7 +46,7 @@ public class CourtService {
 		} else {
 			totalPage = totalPage / 10;
 		}
-		
+
 		map.put("totalPage", totalPage);
 
 		return map;
@@ -136,16 +136,14 @@ public class CourtService {
 
 		return map;
 	}
-	
+
+	@Transactional
 	public void bookingAndPaying(Map<String, Object> insertMap) {
-		try {
-			courtDAO.insertBooking(insertMap);
-			courtDAO.insertPointHistory(insertMap);
-			courtDAO.updateUserPoint(insertMap);
-		} catch (Exception e) {
-			logger.error("insert 실패", e);
-			throw new RuntimeException("insert 실패");
-		}
+
+		courtDAO.insertBooking(insertMap);
+		courtDAO.insertPointHistory(insertMap);
+		courtDAO.updateUserPoint(insertMap);
+
 	}
 
 }
